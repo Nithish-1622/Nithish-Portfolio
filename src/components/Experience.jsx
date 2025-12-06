@@ -372,7 +372,7 @@ const Experience = () => {
                     </motion.div>
 
                     <motion.div
-                      className={`w-full md:w-5/12 ml-16 md:ml-0 p-6 sm:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
+                      className={`w-full md:w-5/12 ml-12 md:ml-0 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
                         index % 2 === 0
                           ? "md:mr-auto md:ml-0"
                           : "md:ml-auto md:mr-0"
@@ -405,7 +405,7 @@ const Experience = () => {
                       />
                       
                       <div className="relative z-10">
-                        <div className="flex items-center gap-4 mb-4">
+                        <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                           <motion.div
                             className="relative"
                             whileHover={{ rotate: 360 }}
@@ -415,20 +415,20 @@ const Experience = () => {
                             <img
                               src={exp.logo}
                               alt={`${exp.company} logo`}
-                              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full object-contain bg-white p-2 shadow-lg ring-2 ring-white"
+                              className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full object-contain bg-white p-1.5 sm:p-2 shadow-lg ring-2 ring-white"
                             />
                           </motion.div>
                           <div className="flex-1">
-                            <h3 className="font-bold text-lg sm:text-xl text-gray-800 group-hover:text-blue-600 transition-colors">
+                            <h3 className="font-bold text-base sm:text-lg md:text-xl text-gray-800 group-hover:text-blue-600 transition-colors">
                               {exp.role}
                             </h3>
-                            <p className="text-gray-600 text-sm sm:text-base font-medium">
+                            <p className="text-gray-600 text-xs sm:text-sm md:text-base font-medium">
                               {exp.company}
                             </p>
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-2 mb-4">
+                        <div className="flex items-center gap-2 mb-3 sm:mb-4">
                           <div className="h-px flex-1 bg-gradient-to-r from-gray-300 to-transparent"></div>
                           <p className="text-gray-500 text-xs sm:text-sm font-semibold tracking-wide">
                             {exp.period}
@@ -436,15 +436,15 @@ const Experience = () => {
                           <div className="h-px flex-1 bg-gradient-to-l from-gray-300 to-transparent"></div>
                         </div>
                         
-                        <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-5">
+                        <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base mb-4 sm:mb-5">
                           {exp.description}
                         </p>
                         
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                           {exp.skills.map((skill, i) => (
                             <motion.span
                               key={i}
-                              className="text-xs sm:text-sm px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-medium rounded-full border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all"
+                              className="text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-medium rounded-full border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all"
                               whileHover={{ scale: 1.05, y: -2 }}
                               transition={{ duration: 0.2 }}
                             >
