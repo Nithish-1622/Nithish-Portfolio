@@ -19,13 +19,7 @@ const AboutMe = () => {
           </h2>
 
           <p className="text-gray-600 mt-8 leading-relaxed">
-            I am Nithish S, a passionate software developer with hands-on
-            experience in building ERP solutions and microservices
-            architectures. As the Lead for CIR International Relations, I
-            actively mentor and guide over 200 junior students, helping them
-            grow in their careers and technical skills. I am dedicated to
-            creating impactful software solutions and fostering a collaborative
-            learning environment within my teams and the wider tech community.
+            I’m Nithish S, an Artificial Intelligence and Data Science student passionate about building intelligent, user-focused applications that solve real-world problems. I enjoy working across full-stack development, AI, and RAG-based pipelines, creating systems that are both scalable and meaningful. With a strong interest in backend engineering, machine learning, and automation, I constantly explore new technologies, build projects, and refine my problem-solving skills. I believe in continuous learning and love turning innovative ideas into impactful digital solutions.
           </p>
 
           <div className="mt-8 flex space-x-4">
