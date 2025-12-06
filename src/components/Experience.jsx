@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaBriefcase, FaGraduationCap, FaUsers } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 // Import your organization logos
 const logos = {
@@ -83,6 +83,28 @@ const techStack = [
 ];
 
 const Experience = () => {
+  const timelineRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Track scroll progress for the timeline section
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on("change", (latest) => {
+      setScrollProgress(latest);
+    });
+    return () => unsubscribe();
+  }, [smoothProgress]);
+
   const workExperience = [
     {
       icon: <FaBriefcase className="text-amber-500" />,
@@ -175,7 +197,7 @@ const Experience = () => {
     <div className="py-10 px-2 sm:py-14 sm:px-4 md:px-8 lg:px-16 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Work Experience Timeline */}
-        <div className="mt-12 sm:mt-20">
+        <div className="mt-12 sm:mt-20" ref={timelineRef}>
           <p className="text-center text-gray-500 uppercase tracking-wider text-xs sm:text-sm mb-2">
             What I've done so far
           </p>
@@ -184,59 +206,270 @@ const Experience = () => {
           </h2>
 
           <div className="relative">
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
+            {/* Animated SVG Path */}
+            <svg
+              className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-full pointer-events-none"
+              style={{ zIndex: 1 }}
+            >
+              <defs>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#1e40af" stopOpacity="1" />
+                  <stop offset="25%" stopColor="#3b82f6" stopOpacity="0.9" />
+                  <stop offset="50%" stopColor="#6366f1" stopOpacity="0.8" />
+                  <stop offset="75%" stopColor="#8b5cf6" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="#a855f7" stopOpacity="0.6" />
+                </linearGradient>
+                
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              
+              {/* Background path with subtle glow */}
+              <path
+                d={`M ${window.innerWidth / 2} 0 ${workExperience.map((_, i) => {
+                  const y = (i + 1) * 280;
+                  const x = i % 2 === 0 
+                    ? window.innerWidth / 2 - 120 
+                    : window.innerWidth / 2 + 120;
+                  return `Q ${x} ${y - 140} ${window.innerWidth / 2} ${y}`;
+                }).join(' ')}`}
+                stroke="#e0e7ff"
+                strokeWidth="3"
+                fill="none"
+                opacity="0.4"
+              />
+              
+              {/* Animated progress path */}
+              <motion.path
+                d={`M ${window.innerWidth / 2} 0 ${workExperience.map((_, i) => {
+                  const y = (i + 1) * 280;
+                  const x = i % 2 === 0 
+                    ? window.innerWidth / 2 - 120 
+                    : window.innerWidth / 2 + 120;
+                  return `Q ${x} ${y - 140} ${window.innerWidth / 2} ${y}`;
+                }).join(' ')}`}
+                stroke="url(#pathGradient)"
+                strokeWidth="4"
+                fill="none"
+                strokeLinecap="round"
+                filter="url(#glow)"
+                initial={{ pathLength: 0 }}
+                style={{
+                  pathLength: smoothProgress,
+                }}
+              />
+              
+              {/* Animated glowing dot */}
+              <motion.g
+                style={{
+                  x: useTransform(smoothProgress, (val) => {
+                    const totalLength = workExperience.length;
+                    const currentIndex = Math.floor(val * totalLength);
+                    const progress = (val * totalLength) % 1;
+                    const isEven = currentIndex % 2 === 0;
+                    const offset = isEven ? -120 : 120;
+                    return window.innerWidth / 2 + offset * Math.sin(progress * Math.PI);
+                  }),
+                  y: useTransform(smoothProgress, (val) => {
+                    return val * (workExperience.length * 280);
+                  })
+                }}
+              >
+                {/* Outer pulse ring */}
+                <motion.circle
+                  r="15"
+                  fill="none"
+                  stroke="#3b82f6"
+                  strokeWidth="2"
+                  opacity="0.3"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0, 0.3]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                {/* Middle ring */}
+                <circle
+                  r="10"
+                  fill="#3b82f6"
+                  opacity="0.3"
+                />
+                {/* Inner bright dot */}
+                <circle
+                  r="6"
+                  fill="#ffffff"
+                  filter="url(#glow)"
+                />
+                <circle
+                  r="4"
+                  fill="#3b82f6"
+                />
+              </motion.g>
+            </svg>
+
             <div className="flex flex-col gap-10">
-              {workExperience.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className={`relative flex flex-col md:flex-row items-center justify-between md:mb-12`}
-                >
-                  <div
-                    className={`w-full md:w-5/12 p-4 sm:p-6 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group ${
-                      index % 2 === 0
-                        ? "md:mr-auto md:ml-0"
-                        : "md:ml-auto md:mr-0"
-                    }`}
+              {workExperience.map((exp, index) => {
+                const cardProgress = (index + 1) / workExperience.length;
+                const isActive = scrollProgress >= cardProgress - 0.25 && scrollProgress <= cardProgress + 0.1;
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className={`relative flex flex-col md:flex-row items-center justify-between md:mb-12`}
+                    style={{ zIndex: 2 }}
                   >
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cntain shadow-md"
+                    <motion.div
+                      className={`w-full md:w-5/12 p-6 sm:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
+                        index % 2 === 0
+                          ? "md:mr-auto md:ml-0"
+                          : "md:ml-auto md:mr-0"
+                      }`}
+                      animate={{
+                        scale: isActive ? 1.08 : 1,
+                        boxShadow: isActive 
+                          ? "0 25px 60px -12px rgba(59, 130, 246, 0.4), 0 0 30px rgba(99, 102, 241, 0.3)" 
+                          : "0 10px 30px -5px rgba(0, 0, 0, 0.1)"
+                      }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      whileHover={{ 
+                        y: -8,
+                        boxShadow: "0 30px 70px -15px rgba(59, 130, 246, 0.5)"
+                      }}
+                    >
+                      {/* Animated background gradient on hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 opacity-0 group-hover:opacity-100 rounded-2xl"
+                        transition={{ duration: 0.3 }}
                       />
-                      <div>
-                        <h3 className="font-bold text-base sm:text-lg">
-                          {exp.role}
-                        </h3>
-                        <p className="text-gray-500 text-sm sm:text-base">
-                          {exp.company}
+                      
+                      {/* Active card accent bar */}
+                      <motion.div
+                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500 rounded-l-2xl"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-4 mb-4">
+                          <motion.div
+                            className="relative"
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.6 }}
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-md opacity-40"></div>
+                            <img
+                              src={exp.logo}
+                              alt={`${exp.company} logo`}
+                              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full object-contain bg-white p-2 shadow-lg ring-2 ring-white"
+                            />
+                          </motion.div>
+                          <div className="flex-1">
+                            <h3 className="font-bold text-lg sm:text-xl text-gray-800 group-hover:text-blue-600 transition-colors">
+                              {exp.role}
+                            </h3>
+                            <p className="text-gray-600 text-sm sm:text-base font-medium">
+                              {exp.company}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="h-px flex-1 bg-gradient-to-r from-gray-300 to-transparent"></div>
+                          <p className="text-gray-500 text-xs sm:text-sm font-semibold tracking-wide">
+                            {exp.period}
+                          </p>
+                          <div className="h-px flex-1 bg-gradient-to-l from-gray-300 to-transparent"></div>
+                        </div>
+                        
+                        <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-5">
+                          {exp.description}
                         </p>
+                        
+                        <div className="flex flex-wrap gap-2">
+                          {exp.skills.map((skill, i) => (
+                            <motion.span
+                              key={i}
+                              className="text-xs sm:text-sm px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-medium rounded-full border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all"
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {skill}
+                            </motion.span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <p className="text-gray-400 text-xs sm:text-sm mt-2">
-                      {exp.period}
-                    </p>
-                    <p className="text-gray-600 mt-4 text-sm sm:text-base">
-                      {exp.description}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {exp.skills.map((skill, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Timeline Dot */}
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full bg-white border-4 border-gray-200 z-10"></div>
-                </motion.div>
-              ))}
+                    </motion.div>
+                    
+                    {/* Enhanced Timeline Dot */}
+                    <motion.div 
+                      className="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-10"
+                      style={{ zIndex: 10 }}
+                    >
+                      {/* Outer glow ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full"
+                        animate={{
+                          scale: isActive ? [1, 1.8, 1] : 1,
+                          opacity: isActive ? [0.5, 0, 0.5] : 0,
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: isActive ? Infinity : 0,
+                          ease: "easeInOut"
+                        }}
+                        style={{
+                          background: "radial-gradient(circle, rgba(59,130,246,0.8) 0%, rgba(59,130,246,0) 70%)",
+                          width: "40px",
+                          height: "40px",
+                          left: "-17.5px",
+                          top: "-17.5px"
+                        }}
+                      />
+                      
+                      {/* Main dot */}
+                      <motion.div
+                        className="w-5 h-5 rounded-full bg-white relative"
+                        animate={{
+                          borderColor: isActive ? "#3b82f6" : "#d1d5db",
+                          scale: isActive ? 1.4 : 1,
+                          boxShadow: isActive 
+                            ? "0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4)"
+                            : "0 0 0 rgba(0, 0, 0, 0)"
+                        }}
+                        style={{
+                          borderWidth: "4px",
+                          borderStyle: "solid"
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Inner gradient dot */}
+                        <motion.div
+                          className="absolute inset-1 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600"
+                          animate={{
+                            opacity: isActive ? 1 : 0,
+                            scale: isActive ? 1 : 0.5
+                          }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
