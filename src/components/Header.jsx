@@ -59,7 +59,7 @@ const Header = () => {
           {/* Mobile Nav Toggle */}
           <div className="flex md:hidden flex-1 justify-between items-center w-full">
             <span className="text-2xl font-extrabold text-gray-900 tracking-widest select-none cursor-pointer transition-transform duration-300 hover:animate-bounce">
-              VIJAY
+              Nithish S
             </span>
             <button
               onClick={() => setIsMenuOpen((v) => !v)}
