@@ -75,12 +75,8 @@ const AboutMe = () => {
         </div>
       </div>
 
-      {/* Heart icon */}
-      <div className="fixed left-4 sm:left-8 bottom-4 sm:bottom-8 text-[2rem] sm:text-[2.5rem] select-none">
-        <span role="img" aria-label="heart" className="text-pink-500">
-          ❤️
-        </span>
-      </div>
+
+    
 
    
       
