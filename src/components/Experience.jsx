@@ -108,26 +108,27 @@ const Experience = () => {
   const workExperience = [
     {
       icon: <FaBriefcase className="text-amber-500" />,
-      role: "Software Developer (LeaveEase)",
-      company: "Gilbarco Veeder-Root Pvt Ltd",
+      role: "Web Developer",
+      company: "KICE INFOSYSTEMS Pvt Ltd",
       period: "2024",
       logo: logos.gilbarco,
       description:
-        "Developed a Leave Management Software that automated the entire leave cycle, from application to manager approval, ensuring efficient tracking and streamlined workflows.",
+        "Developed a comprehensive ecommerce website named G-STORE for Garment Outlet Located at Tirupur with enhancing user experience and driving online sales through a responsive and visually appealing design.",
       skills: ["React.js", "MongoDB", "Node.js", "Express.js"],
       color: "bg-amber-500",
+      link: "https://kiceinfosystems.com/",
     },
-    {
-      icon: <FaBriefcase className="text-blue-500" />,
-      role: "Mobile App Developer (Isaii Ai)",
-      company: "Isaii Ai",
-      period: "2025",
-      logo: logos.isaii,
-      description:
-        "Developed a feature-rich trip booking and management application using React Native, allowing users to seamlessly plan journeys, make reservations, and coordinate their trips in a unified platform.",
-      skills: ["React Native", "Node.js", "Express.js", "MongoDB"],
-      color: "bg-blue-500",
-    },
+    // {
+    //   icon: <FaBriefcase className="text-blue-500" />,
+    //   role: "Null",
+    //   company: "PAVAKE",
+    //   period: "2025",
+    //   logo: logos.isaii,
+    //   description:
+    //     "Working",
+    //   skills: ["React Native", "Node.js", "Express.js", "MongoDB"],
+    //   color: "bg-blue-500",
+    // },  
     {
       icon: <FaGraduationCap className="text-purple-500" />,
       role: "Student Mentor",
@@ -141,12 +142,12 @@ const Experience = () => {
     },
     {
       icon: <FaUsers className="text-green-500" />,
-      role: "Center for International Relations - Student Lead, Student Affairs",
+      role: "Center for International Relations - Student Co-ordinator, Student Affairs",
       company: "Sri Eshwar College of Engineering",
       period: "Jun 2021 - Present",
       logo: logos.sriEshwar,
       description:
-        "Led the Center for International Relations as Student Lead, managing student affairs, organizing events, and fostering global collaborations.",
+        "Played a key role in  the Center for International Relations as Student Lead, managing student affairs, organizing events, and fostering global collaborations.",
       skills: [
         "International Relations",
         "Student Affairs",
@@ -206,7 +207,19 @@ const Experience = () => {
           </h2>
 
           <div className="relative">
-            {/* Animated SVG Path */}
+            {/* Mobile Timeline - Simple Vertical Line */}
+            <div className="md:hidden absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500 opacity-30"></div>
+            
+            {/* Mobile Progress Line */}
+            <motion.div 
+              className="md:hidden absolute left-8 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500"
+              style={{
+                height: useTransform(smoothProgress, [0, 1], ["0%", "100%"]),
+                filter: "drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))"
+              }}
+            />
+            
+            {/* Animated SVG Path - Desktop Only */}
             <svg
               className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-full pointer-events-none"
               style={{ zIndex: 1 }}
@@ -328,15 +341,42 @@ const Experience = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className={`relative flex flex-col md:flex-row items-center justify-between md:mb-12`}
+                    className={`relative flex flex-col md:flex-row items-start md:items-center justify-between md:mb-12`}
                     style={{ zIndex: 2 }}
                   >
+                    {/* Mobile Timeline Dot */}
+                    <motion.div 
+                      className="md:hidden absolute left-8 transform -translate-x-1/2 z-10"
+                      style={{ zIndex: 10, top: "24px" }}
+                    >
+                      <motion.div
+                        className="w-4 h-4 rounded-full bg-white relative border-2"
+                        animate={{
+                          borderColor: isActive ? "#3b82f6" : "#d1d5db",
+                          scale: isActive ? 1.2 : 1,
+                          boxShadow: isActive 
+                            ? "0 0 12px rgba(59, 130, 246, 0.8)"
+                            : "0 0 0 rgba(0, 0, 0, 0)"
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          className="absolute inset-0.5 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600"
+                          animate={{
+                            opacity: isActive ? 1 : 0,
+                            scale: isActive ? 1 : 0.5
+                          }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.div>
+                    </motion.div>
+
                     <motion.div
-                      className={`w-full md:w-5/12 p-6 sm:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
+                      className={`w-full md:w-5/12 ml-16 md:ml-0 p-6 sm:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl transition-all duration-500 group relative overflow-hidden ${
                         index % 2 === 0
                           ? "md:mr-auto md:ml-0"
                           : "md:ml-auto md:mr-0"
-                      }`}
+                      } ${exp.link ? 'cursor-pointer' : ''}`}
                       animate={{
                         scale: isActive ? 1.08 : 1,
                         boxShadow: isActive 
@@ -348,6 +388,7 @@ const Experience = () => {
                         y: -8,
                         boxShadow: "0 30px 70px -15px rgba(59, 130, 246, 0.5)"
                       }}
+                      onClick={() => exp.link && window.open(exp.link, '_blank')}
                     >
                       {/* Animated background gradient on hover */}
                       <motion.div

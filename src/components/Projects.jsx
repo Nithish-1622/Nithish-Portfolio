@@ -19,6 +19,38 @@ const techIcons = {
 
 const projectsData = [
   {
+    title: "Legal Query AI",
+    description:
+      "This project presents a smart legal AI platform that interprets natural language queries with 100% precision, using a powerful Llama-based RAG architecture via Ollama. It offers 5 line structured, scenario-specific outputs.It delivers jurisdiction-aware, legally authenticated results with versatile perspectives & real-time relevance.",
+    // image: placeholderImages[5],
+    techs: ["React", "Node", "Express", "MongoDB"],
+    link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
+    
+  },
+  {
+    title: "TaskRise",
+    description:
+      "A task management platform for academic institutions enabling HoDs to assign tasks to faculty with role-based authentication, real-time tracking, submission workflows, calendar integration, and analytics dashboards. Features responsive design, JWT authentication, file uploads, and comprehensive reporting",
+    // image: placeholderImages[5],
+    techs: ["React", "Node", "Express", "MongoDB"],
+    link: "https://taskrise-nithish.vercel.app/",
+    sample: [
+      { label: "Email", value: "mmohammedmustafa" },
+      { label: "Password", value: "1234", role: "HOD" },
+      { label: "Email", value: "gshobana" },
+      { label: "Password", value: "1234", role: "Faculty" },
+    ],
+  },
+  {
+    title: "FloatChat – AI Powered Conversational Interface:",
+    description:
+      "An AI-driven conversational platform utilizing advanced Llama-based RAG architecture via Ollama. It provides context-aware, multi-perspective responses with real-time data integration, ensuring accurate and relevant interactions across various scenarios.",
+    // image: placeholderImages[5],
+    techs: ["React", "Node", "Express", "MongoDB"],
+    link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
+    
+  },
+  {
     title: "InvoTrack",
     description:
       "Developed an in-house billing management software that automates billing, tracks customers, manages inventory, enables email marketing, and supports secure online transactions for seamless business operations.",
@@ -133,7 +165,7 @@ const Projects = () => {
               }}
             >
               {/* Gradient overlay for card, no image */}
-              <div className="h-64 relative flex flex-col justify-center px-6 py-4">
+              <div className="h-80 relative flex flex-col justify-center px-6 py-4">
                 <h2 className="text-gray-900 text-2xl font-bold mb-2">
                   {project.title}
                 </h2>
@@ -229,6 +261,7 @@ const Projects = () => {
             </button>
             <div className="text-xl font-bold text-gray-900 mb-2 text-center">
               {sampleOpen.title}
+              
             </div>
             <div className="text-base text-[#ffd700] mb-4 font-semibold text-center">
               Sample Login / Info
@@ -240,7 +273,14 @@ const Projects = () => {
                   className="flex justify-between items-center bg-white/70 rounded px-3 py-2 mb-1"
                 >
                   <span className="font-semibold">{item.label}:</span>
-                  <span className="font-mono break-all">{item.value}</span>
+                  <div className="flex flex-col items-end">
+                    <span className="font-mono break-all">{item.value}</span>
+                    {item.role && (
+                      <span className="text-xs text-blue-600 font-semibold mt-1">
+                        ({item.role})
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
