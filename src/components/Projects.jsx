@@ -50,25 +50,26 @@ const projectsData = [
     link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
     
   },
-  {
-    title: "InvoTrack",
+    {
+    title: "MailMate - Email Management Application",
     description:
-      "Developed an in-house billing management software that automates billing, tracks customers, manages inventory, enables email marketing, and supports secure online transactions for seamless business operations.",
-    // image: placeholderImages[0],
+      "Built a web-based email management platform enabling users to compose, send, receive, and organize emails with secure authentication through traditional login and Google OAuth integration, providing a streamlined alternative to conventional email clients.",
+    // image: placeholderImages[5],
     techs: ["React", "Node", "Express", "MongoDB"],
-    link: "https://github.com/yourusername/invotrack",
-    sample: null,
+    link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
+    
   },
+
   {
-    title: "EventSync",
+    title: "TalentVault",
     description:
-      "End-to-end event management software that streamlines the entire event lifecycle, from planning to execution. Includes forms for event details, amenities, communication, transport, branding, and guest room booking.",
+      "Built an AI-powered Resume Repository platform that centralizes candidate data and enables recruiters to semantically search, analyze, and rank resumes using natural language.Transforms raw resumes into structured talent intelligence, significantly reducing manual screening time.",
     // image: placeholderImages[1],
     techs: ["React", "Node", "Express", "MongoDB"],
-    link: "https://event-management-8q6c.vercel.app/",
+    link: "https://talent-vault-eight.vercel.app/",
     sample: [
-      { label: "Email", value: "eaniqac1@sece.ac.in" },
-      { label: "Password", value: "sece" },
+      { label: "Email", value: "anuj@gmail" },
+      { label: "Password", value: "anuj@123" },
     ],
   },
   {
@@ -86,9 +87,9 @@ const projectsData = [
     ],
   },
   {
-    title: "LeaveEase",
+    title: "MetalliSense",
     description:
-      "Leave Management Software for Gilbarco Veeder-Root Pvt Ltd, automating the leave cycle from application to approval. Features real-time status tracking and WhatsApp integration.",
+      "MetalliSense is an AI-powered foundries that optimizes alloy composition in real time.It analyzes spectrometer data to detect deviations and recommend precise alloy corrections. With explainable AI, it provides clear reasoning behind every suggestion.The system reduces material waste, re-trials, and improves overall quality consistency.",
     // image: placeholderImages[3],
     techs: ["React", "Node", "Express", "MongoDB"],
     link: "https://lms-frontend-ten-hazel.vercel.app/",
@@ -120,16 +121,13 @@ const projectsData = [
     ],
   },
   {
-    title: "4Trip - Trip Booking App",
+    title: "StockVision (HDFC)",
     description:
-      "Feature-rich trip booking and management application. Plan journeys, make reservations, and coordinate trips in a unified platform. Available on Google Play.",
+      "The platform visualizes real-time actual prices overlapped with AI-predicted trends and confidence bands on a professional dashboard.Includes deep analytics such as pattern discovery, sector influence, and model performance tracking with real-time updates.",
     // image: placeholderImages[5],
     techs: ["React Native", "Node", "Express", "MongoDB"],
-    link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
-    sample: [
-      { label: "Sample User ID", value: "67d5b997b32740bf20d6d15f" },
-      { label: "Name", value: "Sasi" },
-    ],
+    link: "https://bse-stocks.vercel.app",
+    
   },
 ];
 
