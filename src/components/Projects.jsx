@@ -33,12 +33,12 @@ const projectsData = [
       "A task management platform for academic institutions enabling HoDs to assign tasks to faculty with role-based authentication, real-time tracking, submission workflows, calendar integration, and analytics dashboards. Features responsive design, JWT authentication, file uploads, and comprehensive reporting",
     // image: placeholderImages[5],
     techs: ["React", "Node", "Express", "MongoDB"],
-    link: "https://taskrise-nithish.vercel.app/",
+    link: "https://taskrise-v1.vercel.app/",
     sample: [
       { label: "Email", value: "mmohammedmustafa" },
-      { label: "Password", value: "1234", role: "HOD" },
+      { label: "Password", value: "123", role: "HOD" },
       { label: "Email", value: "gshobana" },
-      { label: "Password", value: "1234", role: "Faculty" },
+      { label: "Password", value: "123", role: "Faculty" },
     ],
   },
   {
