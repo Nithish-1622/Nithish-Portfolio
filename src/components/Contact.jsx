@@ -3,7 +3,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export function Contact() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-white via-gray-50 to-blue-50">
+    <div className="min-h-screen flex flex-col justify-between bg-transparent">
       <div className="flex flex-col lg:flex-row items-center justify-center gap-16 py-20 px-4 md:px-16 lg:px-32">
         {/* Left Info */}
         <div className="flex-1 max-w-md w-full">

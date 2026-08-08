@@ -4,7 +4,7 @@ import profileImage from "../assets/Nith2.jpg";
 
 const AboutMe = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden">
       {/* Background subtle elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-blue-50 rounded-full filter blur-3xl opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-50 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>

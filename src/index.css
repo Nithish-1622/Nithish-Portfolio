@@ -1,10 +1,92 @@
 @import "tailwindcss";
+
 @theme {
-  --font-primary: "Montserrat";
+  --font-primary: "Space Grotesk", "Inter", sans-serif;
+  --font-grotesk: "Space Grotesk", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 body,
-html,
-#root {
+html {
   overflow-x: hidden;
+  background-color: #fafafa;
+  color: #18181b;
+  font-family: var(--font-primary);
+}
+
+/* Blueprint / Graph paper grid */
+.bg-blueprint-grid {
+  background-color: #fafafa;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+  background-attachment: fixed;
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Giant Faint Solid Watermark Text */
+.watermark-solid {
+  color: rgba(0, 0, 0, 0.05);
+  user-select: none;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+/* Camouflaged watermark with bottom fade gradient */
+.watermark-camouflage {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(0, 0, 0, 0.06);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 45%, rgba(0,0,0,0.2) 90%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 45%, rgba(0,0,0,0.2) 90%, rgba(0,0,0,0) 100%);
+  user-select: none;
+}
+
+/* Shadows */
+.shadow-subtle-pill {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-brutalist {
+  box-shadow: 3px 3px 0px #09090b;
+}
+
+.shadow-brutalist-sm {
+  box-shadow: 2px 2px 0px #09090b;
+}
+
+.shadow-brutalist-lg {
+  box-shadow: 5px 5px 0px #09090b;
+}
+
+/* Smooth pulse & subtle dot effect */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.animate-status-pulse {
+  animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

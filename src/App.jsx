@@ -7,9 +7,10 @@ import Experience from "./components/Experience";
 import Achievements from "./components/Achievements";
 import Gallery from "./components/Gallery";
 import { Contact } from "./components/Contact";
+
 function App() {
   return (
-    <div className="font-primary">
+    <div className="font-primary bg-blueprint-grid min-h-screen text-slate-900 overflow-x-hidden">
       <Header />
       <Home />
       <AboutMe />

@@ -66,7 +66,7 @@ const achievements = [
 
 export default function Achievements() {
   return (
-    <div className="py-16 px-4 md:px-8 lg:px-16 bg-white min-h-screen">
+    <div className="py-16 px-4 md:px-8 lg:px-16 bg-transparent min-h-screen">
       <h2 className="text-5xl font-extrabold text-gray-900 mb-4">
         Achievements.
       </h2>

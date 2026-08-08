@@ -127,7 +127,24 @@ const projectsData = [
     // image: placeholderImages[5],
     techs: ["React Native", "Node", "Express", "MongoDB"],
     link: "https://bse-stocks.vercel.app",
-    
+  },
+  {
+    title: "Aegis Runtime",
+    description:
+      "A distributed runtime intelligence platform that captures and analyzes real-time system events using event-driven architecture. It enables trace-based monitoring, timeline reconstruction, and deep observability across microservices using Kafka streams and scalable backend services.",
+    techs: ["Kafka", "Node", "Express", "PostgreSQL", "Docker"],
+  },
+  {
+    title: "RoadWatch",
+    description:
+      "An AI-powered road safety monitoring system that detects potholes, damages, and anomalies using computer vision. It helps authorities track road conditions in real-time and enables proactive maintenance through intelligent analytics and alerts.",
+    techs: ["Python", "TensorFlow", "React", "Flask"],
+  },
+  {
+    title: "VigilX",
+    description:
+      "A smart security intelligence platform designed for real-time threat detection and anomaly analysis. It integrates AI models to monitor system behavior, enforce RBAC, and provide actionable insights for proactive defense in modern applications.",
+    techs: ["React", "Python", "FastAPI", "MongoDB"],
   },
 ];
 
@@ -139,7 +156,7 @@ const Projects = () => {
   });
 
   return (
-    <div className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <div className="py-16 px-4 md:px-8 lg:px-16 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
           Projects.
@@ -285,29 +302,6 @@ const Projects = () => {
           </div>
         </div>
       )}
-      {/* Scroll to top button */}
-      <div className="fixed right-8 bottom-8">
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700 transition duration-300"
-          aria-label="Scroll to top"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-        </button>
-      </div>
     </div>
   );
 };
