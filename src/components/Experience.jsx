@@ -142,6 +142,13 @@ const Experience = () => {
 
   const certifications = [
     {
+      domain: "Cloud Computing",
+      cert: "Azure AI-201 Cloud Developer Associate",
+      org: "Microsoft",
+      date: "Sept 2026",
+      url: "#",
+    },
+    {
       domain: "Python",
       cert: "Advanced Diploma in Python Programming ADPP",
       org: "CSC",

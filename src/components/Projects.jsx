@@ -2,6 +2,35 @@ import React, { useState } from "react";
 import { FaReact, FaPython, FaJs, FaNodeJs, FaDatabase } from "react-icons/fa";
 import { SiTensorflow, SiFlask, SiMongodb, SiArduino } from "react-icons/si";
 
+// Category definitions based on technology stacks
+const categories = [
+  { id: "all", label: "All Projects" },
+  { id: "mern", label: "MERN Stack" },
+  { id: "ai-ml", label: "AI/ML" },
+  { id: "react-native", label: "React Native" },
+  { id: "enterprise", label: "Enterprise/Big Data" },
+];
+
+// Tech stack to category mapping
+const techToCategory = {
+  // MERN Stack
+  React: "mern",
+  Node: "mern",
+  Express: "mern",
+  MongoDB: "mern",
+  // AI/ML
+  Python: "ai-ml",
+  TensorFlow: "ai-ml",
+  Flask: "ai-ml",
+  FastAPI: "ai-ml",
+  // React Native
+  ReactNative: "react-native",
+  // Enterprise/Big Data
+  Kafka: "enterprise",
+  PostgreSQL: "enterprise",
+  Docker: "enterprise",
+};
+
 // Unique placeholder images for each project (replace with your own if available)
 
 // Tech stack icon mapping
@@ -25,6 +54,7 @@ const projectsData = [
     // image: placeholderImages[5],
     techs: ["React", "Node", "Express", "MongoDB"],
     link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
+    category: "ai-ml",
     
   },
   {
@@ -40,6 +70,7 @@ const projectsData = [
       { label: "Email", value: "gshobana" },
       { label: "Password", value: "123", role: "Faculty" },
     ],
+    category: "mern",
   },
   {
     title: "FloatChat – AI Powered Conversational Interface:",
@@ -48,6 +79,7 @@ const projectsData = [
     // image: placeholderImages[5],
     techs: ["React", "Node", "Express", "MongoDB"],
     link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
+    category: "ai-ml",
     
   },
     {
@@ -57,7 +89,7 @@ const projectsData = [
     // image: placeholderImages[5],
     techs: ["React", "Node", "Express", "MongoDB"],
     link: "https://play.google.com/store/apps/details?id=com.vijayguhan.fourtrip",
-    
+    category: "mern",
   },
 
   {
@@ -71,6 +103,7 @@ const projectsData = [
       { label: "Email", value: "anuj@gmail" },
       { label: "Password", value: "anuj@123" },
     ],
+    category: "mern",
   },
   {
     title: "LeadFlow CRM",
@@ -85,6 +118,7 @@ const projectsData = [
       { label: "Admin Email", value: "manish10@gmail.com" },
       { label: "Password", value: "1234" },
     ],
+    category: "mern",
   },
   {
     title: "MetalliSense",
@@ -98,9 +132,8 @@ const projectsData = [
       { label: "Password", value: "1234" },
       { label: "Manager Username", value: "24Gilbarco002" },
       { label: "Password", value: "123" },
-      { label: "Employee Username", value: "24Gilbarco003" },
-      { label: "Password", value: "user@123" },
     ],
+    category: "mern",
   },
   {
     title: "Revozen - Tyre Fitment Center",
@@ -119,6 +152,7 @@ const projectsData = [
       { label: "Individual User Email", value: "manishrahul1705@gmail.com" },
       { label: "Individual Password", value: "1234567890" },
     ],
+    category: "mern",
   },
   {
     title: "StockVision (HDFC)",
@@ -127,24 +161,28 @@ const projectsData = [
     // image: placeholderImages[5],
     techs: ["React Native", "Node", "Express", "MongoDB"],
     link: "https://bse-stocks.vercel.app",
+    category: "react-native",
   },
   {
     title: "Aegis Runtime",
     description:
       "A distributed runtime intelligence platform that captures and analyzes real-time system events using event-driven architecture. It enables trace-based monitoring, timeline reconstruction, and deep observability across microservices using Kafka streams and scalable backend services.",
     techs: ["Kafka", "Node", "Express", "PostgreSQL", "Docker"],
+    category: "enterprise",
   },
   {
     title: "RoadWatch",
     description:
       "An AI-powered road safety monitoring system that detects potholes, damages, and anomalies using computer vision. It helps authorities track road conditions in real-time and enables proactive maintenance through intelligent analytics and alerts.",
     techs: ["Python", "TensorFlow", "React", "Flask"],
+    category: "ai-ml",
   },
   {
     title: "VigilX",
     description:
       "A smart security intelligence platform designed for real-time threat detection and anomaly analysis. It integrates AI models to monitor system behavior, enforce RBAC, and provide actionable insights for proactive defense in modern applications.",
     techs: ["React", "Python", "FastAPI", "MongoDB"],
+    category: "ai-ml",
   },
 ];
 
@@ -155,12 +193,33 @@ const Projects = () => {
     title: "",
   });
 
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredProjects = selectedCategory === "all"
+    ? projectsData
+    : projectsData.filter((project) => project.category === selectedCategory);
+
   return (
     <div className="py-16 px-4 md:px-8 lg:px-16 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
           Projects.
         </h1>
+        <div className="flex flex-wrap gap-2 mb-8">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedCategory === category.id
+                  ? "bg-indigo-600 text-white"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              }`}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
         <p className="text-gray-600 mb-12 max-w-4xl">
           Explore some of my notable projects, showcasing innovations in
           technology and leadership. These initiatives reflect my commitment to
@@ -169,7 +228,7 @@ const Projects = () => {
           technical expertise to drive positive change.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projectsData.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={index}
               className="rounded-lg overflow-hidden shadow-xl bg-black relative group"
