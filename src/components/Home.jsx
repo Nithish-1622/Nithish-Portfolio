@@ -143,13 +143,13 @@ const Home = () => {
           </a>
 
           <a
-            href="https://drive.usercontent.google.com/u/0/uc?id=1oYvNeYVdURx8CuzqJAFBDocKVukiP66i&export=download"
+            href="https://drive.google.com/file/d/1GQLeqOxhIUqP5HoKWJ2NnJnNYdKiER9I/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             download
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-slate-950 text-white font-bold text-sm sm:text-base border border-slate-950 shadow-md hover:bg-slate-800 transition-all duration-200 hover:-translate-y-0.5"
           >
-            <span>📄 Download Resume</span>
+            <span>📄 View My Resume</span>
           </a>
         </div>
       </div>
